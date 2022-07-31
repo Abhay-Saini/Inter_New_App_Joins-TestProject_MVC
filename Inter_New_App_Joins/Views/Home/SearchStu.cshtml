@@ -1,0 +1,72 @@
+﻿@model Inter_New_App_Joins.Models.StudentsModel
+@{
+    ViewBag.Title = "SearchStu";
+}
+
+
+
+
+
+
+
+<div class="text-center">
+    <h2 class="text-primary">Search Here</h2>
+</div>
+
+<br />
+
+@using (Html.BeginForm("SearchStu", "Home", FormMethod.Post))
+{
+    <div class="center-block">
+        @Html.TextBoxFor(m => m.Stu_Id, new { @class = "form-control", @placeholder = "Entre RollNumber Here", data_rule_required = true })
+        @Html.ValidationMessageFor(m => m.Stu_Id, "", new { @class = "error" })
+    </div>
+    <br />
+    <div>
+
+        <input type="submit" value="Search" class="btn btn-success" />
+    </div>
+
+}
+
+<div class="text-center">
+    <h1 class="text-danger">@TempData["notfound"]</h1>
+</div>
+
+@if (Session["StudentData"] != null)
+{
+
+    <div>
+        @{Html.RenderPartial("_SearchStudentResult"); }
+    </div>
+
+    <div>
+        <h3>Thank You </h3>
+    </div>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

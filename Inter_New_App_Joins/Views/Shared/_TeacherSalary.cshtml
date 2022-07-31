@@ -1,0 +1,28 @@
+﻿
+
+<div class="text-center">
+    <h2 class="text-danger">List of Teacher Salary</h2>
+</div>
+
+
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+    </tr>
+    @foreach (var item in ViewBag.Salary)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.Salary</td>
+        </tr>
+
+    }
+
+
+
+
+</table>

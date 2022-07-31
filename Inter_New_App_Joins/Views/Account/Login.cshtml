@@ -1,0 +1,41 @@
+﻿@model Inter_New_App_Joins.Models.UserModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<style>
+    .error{
+        color : #ff0000
+    }
+</style>
+<h2>Login Form</h2>
+
+<div class="container center-block">
+
+    <div class="form-group">
+
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+           
+           
+        <div>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+            <span class="error">@TempData["InvalidEmail"]</span>
+        </div>
+            <br />
+            <div>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                <span class="error">@TempData["InvalidPass"]</span>
+               
+            </div>
+            <br />
+            <input type="submit" value="SignIn" class="btn btn-success" />
+
+        }
+
+    </div>
+
+</div>

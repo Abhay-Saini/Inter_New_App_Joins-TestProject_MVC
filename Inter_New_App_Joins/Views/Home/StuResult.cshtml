@@ -1,0 +1,51 @@
+﻿@model  List<Inter_New_App_Joins.DbConnection.sp_SelectAll_Student_Result>
+
+@{
+    ViewBag.Title = "StuResult";
+}
+
+<div class="text-center">
+    <h2 class="alert-danger">Data By Store Procedure</h2>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Stu_Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Standard</th>
+        <th>Address</th>
+    </tr>
+    @foreach (var item in ViewBag.data)
+    {
+<tr>
+    <td>@item.Stu_Id</td>
+    <td>@item.Name</td>
+    <td>@item.Email</td>
+    <td>@item.Standard</td>
+    <td>@item.Address</td>
+</tr>
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table>

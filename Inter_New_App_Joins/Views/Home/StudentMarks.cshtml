@@ -1,0 +1,33 @@
+﻿@model List<Inter_New_App_Joins.Models.StudentMarks>
+@{
+    ViewBag.Title = "StudentMarks";
+}
+
+<div class="text-center">
+    <h2 class="text-primary">Students Report Table</h2>
+</div>
+
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mathematics</th>
+        <th>Hindi</th>
+        <th>English</th>
+        <th>Science</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.Maths</td>
+            <td>@item.Hindi</td>
+            <td>@item.English</td>
+            <td>@item.Science</td>
+        </tr>
+    }
+
+</table>
+

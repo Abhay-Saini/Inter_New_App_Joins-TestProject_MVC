@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NewSchoolDb290722Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Marks">
+          <Key>
+            <PropertyRef Name="M_Id" />
+          </Key>
+          <Property Name="M_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Maths" Type="int" Nullable="false" />
+          <Property Name="Hindi" Type="int" Nullable="false" />
+          <Property Name="English" Type="int" Nullable="false" />
+          <Property Name="Science" Type="int" Nullable="false" />
+          <Property Name="Stu_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Student">
+          <Key>
+            <PropertyRef Name="Stu_Id" />
+          </Key>
+          <Property Name="Stu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Standard" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Teacher">
+          <Key>
+            <PropertyRef Name="Teacher_Id" />
+          </Key>
+          <Property Name="Teacher_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Subject" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_TeacherSalary">
+          <Key>
+            <PropertyRef Name="TS_Id" />
+          </Key>
+          <Property Name="TS_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Salary" Type="money" />
+          <Property Name="Teacher_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__tbl_Marks__Stu_I__2B3F6F97">
+          <End Role="tbl_Student" Type="Self.tbl_Student" Multiplicity="0..1" />
+          <End Role="tbl_Marks" Type="Self.tbl_Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Student">
+              <PropertyRef Name="Stu_Id" />
+            </Principal>
+            <Dependent Role="tbl_Marks">
+              <PropertyRef Name="Stu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Teach__Teach__286302EC">
+          <End Role="tbl_Teacher" Type="Self.tbl_Teacher" Multiplicity="0..1" />
+          <End Role="tbl_TeacherSalary" Type="Self.tbl_TeacherSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Teacher">
+              <PropertyRef Name="Teacher_Id" />
+            </Principal>
+            <Dependent Role="tbl_TeacherSalary">
+              <PropertyRef Name="Teacher_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_AddStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Stu_Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Email" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Standard" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_SearchStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_SelectAll_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_StuMarks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_TeacherSalary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="NewSchoolDb290722ModelStoreContainer">
+          <EntitySet Name="tbl_Marks" EntityType="Self.tbl_Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Student" EntityType="Self.tbl_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Teacher" EntityType="Self.tbl_Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_TeacherSalary" EntityType="Self.tbl_TeacherSalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserInfo" EntityType="Self.tbl_UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_Marks__Stu_I__2B3F6F97" Association="Self.FK__tbl_Marks__Stu_I__2B3F6F97">
+            <End Role="tbl_Student" EntitySet="tbl_Student" />
+            <End Role="tbl_Marks" EntitySet="tbl_Marks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Teach__Teach__286302EC" Association="Self.FK__tbl_Teach__Teach__286302EC">
+            <End Role="tbl_Teacher" EntitySet="tbl_Teacher" />
+            <End Role="tbl_TeacherSalary" EntitySet="tbl_TeacherSalary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewSchoolDb290722Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Marks">
+          <Key>
+            <PropertyRef Name="M_Id" />
+          </Key>
+          <Property Name="M_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Maths" Type="Int32" Nullable="false" />
+          <Property Name="Hindi" Type="Int32" Nullable="false" />
+          <Property Name="English" Type="Int32" Nullable="false" />
+          <Property Name="Science" Type="Int32" Nullable="false" />
+          <Property Name="Stu_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_Student" Relationship="Self.FK__tbl_Marks__Stu_I__2B3F6F97" FromRole="tbl_Marks" ToRole="tbl_Student" />
+        </EntityType>
+        <EntityType Name="tbl_Student">
+          <Key>
+            <PropertyRef Name="Stu_Id" />
+          </Key>
+          <Property Name="Stu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Standard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Marks" Relationship="Self.FK__tbl_Marks__Stu_I__2B3F6F97" FromRole="tbl_Student" ToRole="tbl_Marks" />
+        </EntityType>
+        <EntityType Name="tbl_Teacher">
+          <Key>
+            <PropertyRef Name="Teacher_Id" />
+          </Key>
+          <Property Name="Teacher_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_TeacherSalary" Relationship="Self.FK__tbl_Teach__Teach__286302EC" FromRole="tbl_Teacher" ToRole="tbl_TeacherSalary" />
+        </EntityType>
+        <EntityType Name="tbl_TeacherSalary">
+          <Key>
+            <PropertyRef Name="TS_Id" />
+          </Key>
+          <Property Name="TS_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Teacher_Id" Type="Int32" />
+          <NavigationProperty Name="tbl_Teacher" Relationship="Self.FK__tbl_Teach__Teach__286302EC" FromRole="tbl_TeacherSalary" ToRole="tbl_Teacher" />
+        </EntityType>
+        <Association Name="FK__tbl_Marks__Stu_I__2B3F6F97">
+          <End Role="tbl_Student" Type="Self.tbl_Student" Multiplicity="0..1" />
+          <End Role="tbl_Marks" Type="Self.tbl_Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Student">
+              <PropertyRef Name="Stu_Id" />
+            </Principal>
+            <Dependent Role="tbl_Marks">
+              <PropertyRef Name="Stu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Teach__Teach__286302EC">
+          <End Role="tbl_Teacher" Type="Self.tbl_Teacher" Multiplicity="0..1" />
+          <End Role="tbl_TeacherSalary" Type="Self.tbl_TeacherSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Teacher">
+              <PropertyRef Name="Teacher_Id" />
+            </Principal>
+            <Dependent Role="tbl_TeacherSalary">
+              <PropertyRef Name="Teacher_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewSchoolDb290722Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Marks" EntityType="Self.tbl_Marks" />
+          <EntitySet Name="tbl_Student" EntityType="Self.tbl_Student" />
+          <EntitySet Name="tbl_Teacher" EntityType="Self.tbl_Teacher" />
+          <EntitySet Name="tbl_TeacherSalary" EntityType="Self.tbl_TeacherSalary" />
+          <AssociationSet Name="FK__tbl_Marks__Stu_I__2B3F6F97" Association="Self.FK__tbl_Marks__Stu_I__2B3F6F97">
+            <End Role="tbl_Student" EntitySet="tbl_Student" />
+            <End Role="tbl_Marks" EntitySet="tbl_Marks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Teach__Teach__286302EC" Association="Self.FK__tbl_Teach__Teach__286302EC">
+            <End Role="tbl_Teacher" EntitySet="tbl_Teacher" />
+            <End Role="tbl_TeacherSalary" EntitySet="tbl_TeacherSalary" />
+          </AssociationSet>
+          <FunctionImport Name="sp_AddStudent">
+            <Parameter Name="Stu_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Standard" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SearchStudent" ReturnType="Collection(NewSchoolDb290722Model.sp_SearchStudent_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SelectAll_Student" ReturnType="Collection(NewSchoolDb290722Model.sp_SelectAll_Student_Result)" />
+          <FunctionImport Name="sp_StuMarks" ReturnType="Collection(NewSchoolDb290722Model.sp_StuMarks_Result)" />
+          <FunctionImport Name="sp_TeacherSalary" ReturnType="Collection(NewSchoolDb290722Model.sp_TeacherSalary_Result)" />
+          <EntitySet Name="tbl_UserInfo" EntityType="NewSchoolDb290722Model.tbl_UserInfo" />
+        </EntityContainer>
+        <ComplexType Name="sp_SearchStudent_Result">
+          <Property Type="Int32" Name="Stu_Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Standard" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Address" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_SelectAll_Student_Result">
+          <Property Type="Int32" Name="Stu_Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Standard" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Address" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_StuMarks_Result">
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="Int32" Name="Maths" Nullable="false" />
+          <Property Type="Int32" Name="Hindi" Nullable="false" />
+          <Property Type="Int32" Name="English" Nullable="false" />
+          <Property Type="Int32" Name="Science" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_TeacherSalary_Result">
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="19" />
+        </ComplexType>
+        <EntityType Name="tbl_UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewSchoolDb290722ModelStoreContainer" CdmEntityContainer="NewSchoolDb290722Entities1">
+          <EntitySetMapping Name="tbl_Marks">
+            <EntityTypeMapping TypeName="NewSchoolDb290722Model.tbl_Marks">
+              <MappingFragment StoreEntitySet="tbl_Marks">
+                <ScalarProperty Name="M_Id" ColumnName="M_Id" />
+                <ScalarProperty Name="Maths" ColumnName="Maths" />
+                <ScalarProperty Name="Hindi" ColumnName="Hindi" />
+                <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="Science" ColumnName="Science" />
+                <ScalarProperty Name="Stu_Id" ColumnName="Stu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Student">
+            <EntityTypeMapping TypeName="NewSchoolDb290722Model.tbl_Student">
+              <MappingFragment StoreEntitySet="tbl_Student">
+                <ScalarProperty Name="Stu_Id" ColumnName="Stu_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Teacher">
+            <EntityTypeMapping TypeName="NewSchoolDb290722Model.tbl_Teacher">
+              <MappingFragment StoreEntitySet="tbl_Teacher">
+                <ScalarProperty Name="Teacher_Id" ColumnName="Teacher_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TeacherSalary">
+            <EntityTypeMapping TypeName="NewSchoolDb290722Model.tbl_TeacherSalary">
+              <MappingFragment StoreEntitySet="tbl_TeacherSalary">
+                <ScalarProperty Name="TS_Id" ColumnName="TS_Id" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Teacher_Id" ColumnName="Teacher_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AddStudent" FunctionName="NewSchoolDb290722Model.Store.sp_AddStudent" />
+          <FunctionImportMapping FunctionImportName="sp_SearchStudent" FunctionName="NewSchoolDb290722Model.Store.sp_SearchStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewSchoolDb290722Model.sp_SearchStudent_Result">
+                <ScalarProperty Name="Stu_Id" ColumnName="Stu_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SelectAll_Student" FunctionName="NewSchoolDb290722Model.Store.sp_SelectAll_Student">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewSchoolDb290722Model.sp_SelectAll_Student_Result">
+                <ScalarProperty Name="Stu_Id" ColumnName="Stu_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_StuMarks" FunctionName="NewSchoolDb290722Model.Store.sp_StuMarks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewSchoolDb290722Model.sp_StuMarks_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Maths" ColumnName="Maths" />
+                <ScalarProperty Name="Hindi" ColumnName="Hindi" />
+                <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="Science" ColumnName="Science" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_TeacherSalary" FunctionName="NewSchoolDb290722Model.Store.sp_TeacherSalary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewSchoolDb290722Model.sp_TeacherSalary_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_UserInfo">
+            <EntityTypeMapping TypeName="NewSchoolDb290722Model.tbl_UserInfo">
+              <MappingFragment StoreEntitySet="tbl_UserInfo">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

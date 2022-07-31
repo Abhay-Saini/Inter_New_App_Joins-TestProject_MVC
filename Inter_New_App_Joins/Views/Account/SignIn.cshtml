@@ -1,0 +1,46 @@
+﻿@model Inter_New_App_Joins.Models.UserModel
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<style>
+    .error{
+        color : #ff0000
+    }
+</style>
+
+<h3>Please SignIn Before You Start</h3>
+
+
+<div class="container center-block">
+
+    <div class="form-group">
+
+
+        @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+        {
+            <div>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter your Name" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "error" })
+            </div>
+            <br />
+            <div>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your Email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+            </div>
+            <br />
+            <div>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+            </div>
+            <br />
+            <input type="submit" value="SignIn" class="btn btn-success" />
+
+        }
+
+    </div>
+    <div>
+            @Html.ActionLink("Already have an Account", "Login")
+        </div>
+</div>
+
